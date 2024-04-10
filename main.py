@@ -1,5 +1,4 @@
 from time import sleep
-from sseclient import SSEClient
 import os
 import requests
 try:
