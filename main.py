@@ -1,5 +1,6 @@
 from time import sleep
 from sseclient import SSEClient
+import os
 import requests
 try:
     import RPi.GPIO as GPIO
@@ -10,6 +11,8 @@ NOTIFICATION_TIME_SECONDS = 15
 POLL_TIME_SECONDS = 10
 PIN = 24
 URL = 'http://mysite.com/event_endpoint'
+if 'RPI_EVENT_URL' in os.environ:
+    URL = os.environ['RPI_EVENT_URL']
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(PIN, GPIO.OUT)
 
@@ -27,6 +30,9 @@ while True:
         hash = response.text
         if hash != lastHash:
             print("new hash!")
+            print(hash)
+            if (lastHash != ""):
+                notify()
             lastHash = hash
     except:
         pass
