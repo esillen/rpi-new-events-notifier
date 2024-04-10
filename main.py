@@ -1,10 +1,17 @@
 from time import sleep
 import os
 import requests
+import pygame
+import random
+from common import AUDIO_CLIPS
 try:
     import RPi.GPIO as GPIO
 except RuntimeError:
     print("Error importing RPi.GPIO! This is probably because you need superuser privileges.  You can achieve this by using 'sudo' to run your script")
+
+
+pygame.mixer.init()
+pygame.mixer.music.set_volume(1.0)
 
 NOTIFICATION_TIME_SECONDS = 15
 POLL_TIME_SECONDS = 10
@@ -17,8 +24,15 @@ GPIO.setup(PIN, GPIO.OUT)
 
 lastHash = ""
 
+
+def play_random_audio():
+    random_clip = random.choice(AUDIO_CLIPS)
+    filepath = os.path.join(os.path.dirname(__file__), 'clips', random_clip)
+    pygame.mixer.music.load(filepath)
+    pygame.mixer.music.play()
+
 def notify():
-    print("new message received!")
+    play_random_audio()
     GPIO.output(PIN, GPIO.LOW)
     sleep(NOTIFICATION_TIME_SECONDS)
     GPIO.output(PIN, GPIO.HIGH)
