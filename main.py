@@ -27,7 +27,7 @@ while True:
         hash = response.text
         if hash != lastHash:
             print("new hash!")
-            break
+            lastHash = hash
     except:
         pass
     sleep(POLL_TIME_SECONDS)
