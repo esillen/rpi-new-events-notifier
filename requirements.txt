@@ -1,2 +1,3 @@
 sseclient==0.0.27
 RPi.GPIO==0.7.1
+requests==2.31.0
