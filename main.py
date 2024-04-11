@@ -21,6 +21,7 @@ if 'RPI_EVENT_URL' in os.environ:
     URL = os.environ['RPI_EVENT_URL']
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(PIN, GPIO.OUT)
+GPIO.output(PIN, GPIO.HIGH)
 
 lastHash = ""
 
@@ -50,3 +51,4 @@ while True:
     except:
         pass
     sleep(POLL_TIME_SECONDS)
+GPIO.output(PIN, GPIO.HIGH)
