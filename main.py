@@ -38,6 +38,12 @@ def notify():
     sleep(NOTIFICATION_TIME_SECONDS)
     GPIO.output(PIN, GPIO.HIGH)
 
+# Just notifying that it has started and is up and hasn't run into a problem yet
+print("starting")
+GPIO.output(PIN, GPIO.LOW)
+sleep(2)
+GPIO.output(PIN, GPIO.HIGH)
+
 while True:
     try:
         response = requests.get(URL)
@@ -51,4 +57,3 @@ while True:
     except:
         pass
     sleep(POLL_TIME_SECONDS)
-GPIO.output(PIN, GPIO.HIGH)
