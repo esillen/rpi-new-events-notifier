@@ -4,7 +4,7 @@ import pygame
 from common import AUDIO_CLIPS
 
 
-pygame.mixer.init()
+pygame.mixer.init(buffer=1024)
 pygame.mixer.music.set_volume(1.0)
 
 

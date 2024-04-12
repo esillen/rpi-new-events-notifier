@@ -10,7 +10,7 @@ except RuntimeError:
     print("Error importing RPi.GPIO! This is probably because you need superuser privileges.  You can achieve this by using 'sudo' to run your script")
 
 
-pygame.mixer.init()
+pygame.mixer.init(buffer=1024)
 pygame.mixer.music.set_volume(1.0)
 
 NOTIFICATION_TIME_SECONDS = 15
@@ -21,7 +21,7 @@ URL_DEV = "http://localhost:5000/event_endpoint"
 if 'RPI_EVENT_URL' in os.environ:
     URL = os.environ['RPI_EVENT_URL']
 if 'RPI_EVENT_URL_DEV' in os.environ:
-    URL_DEV = os.environ['RPI_EVENT_URL_DEV']    
+    URL_DEV = os.environ['RPI_EVENT_URL_DEV']
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(PIN, GPIO.OUT)
 GPIO.output(PIN, GPIO.HIGH)
