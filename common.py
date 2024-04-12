@@ -8,4 +8,5 @@ AUDIO_CLIPS = ['sboe.mp3',
                'yeah-boiii-i-i-i.mp3',
                'george-micael-wham-careless-whisper-1.mp3',
                'kids_cheering.mp3',
-               'epicsaxguy.mp3']
+               'epicsaxguy.mp3',
+               'snoop-dogg-base-instrumental-mp3cut.mp3']
