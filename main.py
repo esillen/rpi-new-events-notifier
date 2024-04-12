@@ -40,10 +40,15 @@ def notify():
 
 
 # Get initial hashes
-lastHash = requests.get(URL).text
-lastHashDev = requests.get(URL_DEV).text
-print("hash", lastHash)
-print("hashDev", lastHashDev)
+while True:
+    try:
+        lastHash = requests.get(URL).text
+        print("hash", lastHash)
+        lastHashDev = requests.get(URL_DEV).text
+        print("hashDev", lastHashDev)
+        break
+    except:
+        pass
 
 # Just notifying that it has started and is up and hasn't run into a problem yet
 print("starting")
