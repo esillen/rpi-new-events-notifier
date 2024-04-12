@@ -48,7 +48,8 @@ while True:
         print("hashDev", lastHashDev)
         break
     except:
-        pass
+        "failed to get hashes, retrying in 5 seconds"
+        sleep(5)
 
 # Just notifying that it has started and is up and hasn't run into a problem yet
 print("starting")
