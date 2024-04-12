@@ -14,6 +14,7 @@ def play_audio(clip):
     pygame.mixer.music.play()
 
 for clip in AUDIO_CLIPS:
+    print(clip)
     play_audio(clip)
     sleep(7)
 print()
