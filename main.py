@@ -1,5 +1,6 @@
 from time import sleep
 import os
+import re
 import requests
 import pygame
 import random
@@ -57,13 +58,25 @@ GPIO.output(PIN, GPIO.LOW)
 sleep(2)
 GPIO.output(PIN, GPIO.HIGH)
 
+def getHash(inputText):
+    matches = re.findall(r"#STATUS#(.{40})#\/STATUS#", inputText)
+    if len(matches) != 1:
+        return None
+    return matches[0]
+
 while True:
     try:
-        hash = requests.get(URL).text
-        print("hash", lastHash)
-        hashDev = requests.get(URL_DEV).text
-        print("hashDev", lastHashDev)
-        if hash != lastHash or hashDev != lastHashDev:
+        hash = getHash(requests.get(URL).text)
+        if hash:
+            print("hash", lastHash)
+        else:
+            print("hash not found")
+        hashDev = getHash(requests.get(URL_DEV).text)
+        if hashDev:
+            print("hashDev", lastHashDev)
+        else:
+            print("hashDev not found")
+        if (hash and hash != lastHash) or (hashDev and hashDev != lastHashDev):
             print("new hash!")
             notify()
             lastHash = hash
