@@ -41,9 +41,9 @@ def notify():
 
 def getHash(inputText):
     matches = re.findall(r"#STATUS#(.{40})#\/STATUS#", inputText)
-    if len(matches) != 1:
+    if len(matches) != 2:
         return None
-    return matches[0]
+    return matches[1]
 
 # Get initial hashes
 while True:
