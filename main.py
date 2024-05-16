@@ -39,13 +39,18 @@ def notify():
     sleep(NOTIFICATION_TIME_SECONDS)
     GPIO.output(PIN, GPIO.HIGH)
 
+def getHash(inputText):
+    matches = re.findall(r"#STATUS#(.{40})#\/STATUS#", inputText)
+    if len(matches) != 1:
+        return None
+    return matches[0]
 
 # Get initial hashes
 while True:
     try:
-        lastHash = requests.get(URL).text
+        lastHash = getHash(requests.get(URL).text)
         print("hash", lastHash)
-        lastHashDev = requests.get(URL_DEV).text
+        lastHashDev = getHash(requests.get(URL_DEV).text)
         print("hashDev", lastHashDev)
         break
     except:
@@ -58,22 +63,18 @@ GPIO.output(PIN, GPIO.LOW)
 sleep(2)
 GPIO.output(PIN, GPIO.HIGH)
 
-def getHash(inputText):
-    matches = re.findall(r"#STATUS#(.{40})#\/STATUS#", inputText)
-    if len(matches) != 1:
-        return None
-    return matches[0]
+
 
 while True:
     try:
         hash = getHash(requests.get(URL).text)
         if hash:
-            print("hash", lastHash)
+            print("hash", hash)
         else:
             print("hash not found")
         hashDev = getHash(requests.get(URL_DEV).text)
         if hashDev:
-            print("hashDev", lastHashDev)
+            print("hashDev", hashDev)
         else:
             print("hashDev not found")
         if (hash and hash != lastHash) or (hashDev and hashDev != lastHashDev):
