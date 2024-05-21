@@ -52,7 +52,8 @@ while True:
         print("hash", lastHash)
         lastHashDev = getHash(requests.get(URL_DEV).text)
         print("hashDev", lastHashDev)
-        break
+        if lastHash and lastHashDev:
+            break
     except:
         "failed to get hashes, retrying in 5 seconds"
         sleep(5)
